@@ -1,22 +1,26 @@
 <?php
 
 return [
-    'default' => 'local',
+    'default' => [
+        'import' => 'remote',
+        'export' => 'remote'
+    ],
 
-    'storages' => [
+    'imports' => [
         'remote' => [
-            'class' => \nikitakilpa\FileManager\Services\Impls\ImportService::class,
-            'disk' => 'sftp',
-            'path' => '/home/n.kilpa',
-            'export_path' => '/home/n.kilpa/exports',
-            'import_path' => '/home/n.kilpa/imports',
+            'service_class' => \nikitakilpa\FileManager\Services\Impls\ImportService::class,
+            'driver' => 'sftp',
+            'dir_path' => '/home/n.kilpa',
+            'import_path' => '/local/imports'
         ],
-        'local' => [
-            'class' => \nikitakilpa\FileManager\Services\Impls\ImportService::class,
-            'disk' => 'local',
-            'path' => '/local',
-            'export_path' => '/local/exports',
-            'import_path' => '/local/imports',
+
+    ],
+    'exports' => [
+        'remote' => [
+            'service_class' => \nikitakilpa\FileManager\Services\Impls\ExportService::class,
+            'driver' => 'sftp',
+            'dir_path' => '/home/n.kilpa',
+            'export_path' => '/local/exports'
         ]
     ]
 ];
