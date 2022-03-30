@@ -12,7 +12,7 @@ class UploadFileCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'file:upload {filepath} {disk} {--D|dir_path=} {--E|export_path=}';
+    protected $signature = 'file:upload {filename} {storage} {--D|dir_path=} {--P|export_path=}';
 
     /**
      * The console command description.
@@ -23,18 +23,16 @@ class UploadFileCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
     public function handle()
     {
-        $filepath = $this->argument('filepath');
-        $disk = $this->argument('disk');
+        $filename = $this->argument('filename');
+        $storage = $this->argument('storage');
 
         $dir_path = $this->option('dir_path');
         $export_path = $this->option('export_path');
 
         $manager = new ExportManager();
-        $manager->storage($disk)->export($filepath, $dir_path, $export_path);
+        $manager->storage($storage)->export($filename, $dir_path, $export_path);
     }
 }

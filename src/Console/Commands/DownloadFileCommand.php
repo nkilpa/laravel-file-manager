@@ -12,7 +12,7 @@ class DownloadFileCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'file:download {filepath} {disk} {--D|dir_path=} {--I|import_path=}';
+    protected $signature = 'file:download {filename} {storage} {--D|dir_path=} {--P|import_path=}';
 
     /**
      * The console command description.
@@ -27,13 +27,13 @@ class DownloadFileCommand extends Command
      */
     public function handle()
     {
-        $filepath = $this->argument('filepath');
-        $disk = $this->argument('disk');
+        $filename = $this->argument('filename');
+        $storage = $this->argument('storage');
 
         $dir_path = $this->option('dir_path');
         $import_path = $this->option('import_path');
 
         $manager = new ImportManager();
-        $manager->storage($disk)->import($filepath, $dir_path, $import_path);
+        $manager->storage($storage)->import($filename, $dir_path, $import_path);
     }
 }

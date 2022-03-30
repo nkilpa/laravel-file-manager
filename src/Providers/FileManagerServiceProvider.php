@@ -9,8 +9,8 @@ use nikitakilpa\FileManager\Components\Impls\ImporterComponent;
 use nikitakilpa\FileManager\Components\Interfaces\ExporterInterface;
 use nikitakilpa\FileManager\Components\Interfaces\ImporterInterface;
 use nikitakilpa\FileManager\Console\Commands\DownloadFileCommand;
-use nikitakilpa\FileManager\Console\Commands\PutCsvInDbCommand;
-use nikitakilpa\FileManager\Console\Commands\GetCsvFromDbCommand;
+use nikitakilpa\FileManager\Console\Commands\WriteDbCommand;
+use nikitakilpa\FileManager\Console\Commands\ReadDbCommand;
 use nikitakilpa\FileManager\Console\Commands\UploadFileCommand;
 
 class FileManagerServiceProvider extends ServiceProvider
@@ -30,13 +30,13 @@ class FileManagerServiceProvider extends ServiceProvider
             $this->commands([
                 DownloadFileCommand::class,
                 UploadFileCommand::class,
-                PutCsvInDbCommand::class,
-                GetCsvFromDbCommand::class,
+                WriteDbCommand::class,
+                ReadDbCommand::class,
             ]);
         }
 
         $this->publishes([
-            __DIR__.'/../Config/excel.php' => config_path('excel.php'),
+            __DIR__.'/../Config/storage.php' => config_path('storage.php'),
         ]);
 
         $this->loadRoutesFrom(__DIR__ . '/../Routes/routes.php');
